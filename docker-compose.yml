@@ -1,0 +1,17 @@
+version: '2'
+services:
+  database:
+    image: mysql:5.7
+    container_name: start-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+    - 6603:3306
+  application:
+    build: .
+    container_name: appsub
+    depends_on: [database]
+    links:
+    - database:mysql
+    ports:
+    - "8080:8080"
